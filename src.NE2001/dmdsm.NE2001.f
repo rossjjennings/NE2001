@@ -64,8 +64,8 @@ c       farm:   factors that multiply n_e^2 when calculating SM
         common/armfactors/
      .     harm(narmsmax),narm(narmsmax),warm(narmsmax),farm(narmsmax)
 
-	real armpaths, armdistances
-	common/armpathlengths/ armpaths(narmsmax1), armdistances(narmsmax1)
+	real armpaths(narmsmax1), armdistances(narmsmax1)
+	common/armpathlengths/ armpaths, armdistances
 
 
 
@@ -405,7 +405,7 @@ c       armpaths(whicharm) = armpaths(whicharm)-dd      ! < 16 Jan '03
 
 	do i=1,narmsmax1
 	  armdistances(i) = 
-     .        armdistances(i) / (max(1,armpaths(i)/dstep))	! mean distance of arm 
+     .        armdistances(i) / (max(1.0,armpaths(i)/dstep))	! mean distance of arm 
 	enddo
 	dm1 = dm1 * dstep_pc      
 	dm2 = dm2 * dstep_pc      

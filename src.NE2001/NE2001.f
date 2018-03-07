@@ -26,7 +26,7 @@ c  or pulsar DM as a function of l, b, and distance.
 c functions:
 
 	integer iargc
-	external iargc
+	intrinsic iargc
         real em, tauiss, scintbw, scintime, theta_xgal, theta_gal
 	real transition_frequency
 
