@@ -64,8 +64,8 @@ c       farm:   factors that multiply n_e^2 when calculating SM
         common/armfactors/
      .     harm(narmsmax),narm(narmsmax),warm(narmsmax),farm(narmsmax)
 
-	real armpaths(narmsmax1), armdistances(narmsmax1)
-	common/armpathlengths/ armpaths, armdistances
+	real armpaths, armdistances
+	common/armpathlengths/armpaths(narmsmax1), armdistances(narmsmax1)
 
 
 
