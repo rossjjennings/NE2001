@@ -5,4 +5,6 @@ It has been modified in a couple of small ways to get it to compile with modern 
 
 To build the executable, run `make pgm` from the `src.NE2001` subdirectory.
 If all goes well, the `NE2001` binary should show up in the `bin.NE2001` subdirectory.
-You can also build NE2001 as a library by running `make lib` or build both the library and executable by running `make all`.
+You can also build NE2001 as a library by running `make lib` or build both the library and executable by running `make all`. 
+
+The original 2002 documentation can be found in `src.NE2001/code.pdf`.
