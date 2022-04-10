@@ -5,10 +5,10 @@
 # Then type 'make pgm' to make the NE2001 interface 
 # or        'make lib' to meke the library.
 #
-FC      = f77 -std=f95
+FC      = f77
 RANLIB  = ranlib
 ARFLAGS = rc
-FFLAGS  = -O
+FFLAGS  = -std=f95 -O
 LDFLAGS = -s
 #
 BINDIR = ../bin.NE2001
