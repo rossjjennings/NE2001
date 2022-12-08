@@ -8,7 +8,7 @@
 FC      = f77
 RANLIB  = ranlib
 ARFLAGS = rc
-FFLAGS  = -std=f95 -O
+FFLAGS  = -std=legacy -O
 LDFLAGS = -s
 #
 BINDIR = ../bin.NE2001

@@ -1,7 +1,7 @@
 # NE2001
 This is a version of the NE2001 galactic electron density model (interactive version at https://www.nrl.navy.mil/rsd/RORF/ne2001/,
 original Fortran code at http://hosting.astro.cornell.edu/~cordes/NE2001/).
-It has been modified in a couple of small ways to get it to compile with modern versions of gfortran (tested with gfortran 11.2.0 on Ubuntu 21.10).
+It has been modified in a couple of small ways to get it to compile with modern versions of gfortran (tested with gfortran 11.3.0 on Ubuntu 22.04).
 
 To build the executable, run `make pgm` from the `src.NE2001` subdirectory.
 If all goes well, the `NE2001` binary should show up in the `bin.NE2001` subdirectory.
