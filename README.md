@@ -1,5 +1,5 @@
 # NE2001
-This is a version of the NE2001 galactic electron density model (original Fortran code at http://hosting.astro.cornell.edu/~cordes/NE2001/).
+This is a version of the NE2001 galactic electron density model, developed in 2001 by James M. Cordes and T. Joseph W. Lazio and released on the arXiv at https://arxiv.org/abs/astro-ph/0207156 (original Fortran code at http://hosting.astro.cornell.edu/~cordes/NE2001/).
 It has been modified in a couple of small ways to get it to compile with modern versions of gfortran (tested with gfortran 11.3.0 on Ubuntu 22.04).
 
 ## Compilation instructions (Unix/Linux)
