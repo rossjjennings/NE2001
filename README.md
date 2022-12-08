@@ -14,7 +14,7 @@ git clone https://github.com/rossjjennings/NE2001.git
 ```
 2. If you wish, edit `Makefile` and set the value of `BINDIR` to the destination where you would like the executable to reside. The default location is in the `bin.NE2001` subdirectory. 
 3. To compile the code, `cd` into the `src.NE2001` subdirectory and type `make`.  
-4. Copy the files in `input.NE2001` to the directory where you will execute the program NE2001. The perl script `run NE2001.pl`, if used, also needs to be executed in the same directory containing the input files. The perl script needs to be edited to designate the location of the executable for NE2001.
+4. Copy the files in `input.NE2001` to the directory where you will execute the program NE2001. The perl script `run_NE2001.pl`, if used, also needs to be executed in the same directory containing the input files. The perl script needs to be edited to designate the location of the executable for NE2001.
 
 Additional information (taken from the original 2002 documentation) can be found in DESCRIPTION.md or in `src.NE2001/code.pdf`.
 
