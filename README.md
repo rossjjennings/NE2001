@@ -22,7 +22,7 @@ src.NE2001/dmdsm.NE2001.f
 src.NE2001/neLISM.NE2001.f
 src.NE2001/neclumpN.f
 src.NE2001/run_NE2001.pl
-src.NE2001/s attering98.f
+src.NE2001/scattering98.f
 input.NE2001/gal01.inp
 input.NE2001/ne_arms_log_mod.inp
 input.NE2001/ne_gc.inp
@@ -41,8 +41,7 @@ A description of the functionality of the code is as follows: The call to `dmdsm
 ```fortran
 call dmdsm(l,b,ndir,dm,dist,limit,sm,smtau,smtheta,smiso) .
 ```
-Here the input data include Galactic longitude and latitude `l` and `b` (in radians) and a flag `ndir` indicating whether distance is to be calculated from dispersion measure (`ndir` $\ge$ 0), or *vice-versa* (ndir < 0). In either case, `dm` and `dist` have units of pc cm$^{-3}$ and kpc, respectively. A flag `limit` is set if `ndir` $\ge$ 0 and the model distance is a lower limit; this will occur, for example, if a large `dm` is specified at high galactic latitude. The subroutine also returns four estimates of scattering measure, all having units kpc m$^{-20/3}$. The first, `sm`, conforms to the definition $\mathrm{SM} = \int_0^D ds\; C^2_n(s)$ with uniform weighting along the line of sight. The next two estimates, `smtau` and `smtheta`, correspond to line-of-sight weightings appropriate for  
-temporal and angular broadening of galactic sources, respectively. Temporal broadening emphasizes scattering material midway between source and observer, while angular broadening favors material closest to the observer; see Eqs. (A14, B2) of Cordes, Weisberg, & Boriakoff (1985). The last estimate, `smiso` uses the weighting appropriate for calculating the isoplanatic angle of scattering.
+Here the input data include Galactic longitude and latitude `l` and `b` (in radians) and a flag `ndir` indicating whether distance is to be calculated from dispersion measure (`ndir` $\ge$ 0), or *vice-versa* (ndir < 0). In either case, `dm` and `dist` have units of $\mathrm{pc}\thinspace\mathrm{cm}^{-3}$ and $\mathrm{kpc}$, respectively. A flag `limit` is set if `ndir` $\ge$ 0 and the model distance is a lower limit; this will occur, for example, if a large `dm` is specified at high galactic latitude. The subroutine also returns four estimates of scattering measure, all having units $\mathrm{kpc}\thinspace\mathrm m^{-20/3}$. The first, `sm`, conforms to the definition $\mathrm{SM} = \int_0^D ds\ C^2_n(s)$ with uniform weighting along the line of sight. The next two estimates, `smtau` and `smtheta`, correspond to line-of-sight weightings appropriate for temporal and angular broadening of galactic sources, respectively. Temporal broadening emphasizes scattering material midway between source and observer, while angular broadening favors material closest to the observer; see Eqs. (A14, B2) of Cordes, Weisberg, & Boriakoff (1985). The last estimate, `smiso` uses the weighting appropriate for calculating the isoplanatic angle of scattering.
 
 Integrations in `dmdsm` involve evaluations of the model at a given Galactic location $(x, y, z)$ through a call to subroutine `density_2001`, where `x`, `y`, `z` are Galactocentric Cartesian coordinates, measured in kiloparsecs, with the axes parallel to $(l, b) = (0\degree, 90\degree)$, $(180\degree, 0\degree)$, and $(0\degree, 90\degree)$;
 ```
@@ -67,18 +66,18 @@ Usage: NE2001 l b DM/D ndir
        ndir = 1 (DM->D)    -1 (D->DM)  
 ```
 
-Program `NE2001` uses output from `dmdsm` to calculate scattering and scintillation quantities by making suitable calls to a series of functions. In all cases, input distances, scattering measures, frequencies and velocities are in standard units (kpc, kpc m$^{-20/3}$ , GHz and km s$^{-1}$):
+Program `NE2001` uses output from `dmdsm` to calculate scattering and scintillation quantities by making suitable calls to a series of functions. In all cases, input distances, scattering measures, frequencies and velocities are in standard units ( $\mathrm{kpc}$, $\mathrm{kpc}\thinspace\mathrm{m}^{-20/3}$, $\mathrm{GHz}$ and $\mathrm{km}\thinspace\mathrm{s}^{-1}$ ):
 1. `function tauiss(d,sm,nu)`: calculates the pulse broadening time, $\tau_d$ (ms).
 2. `function scintbw(d,sm,nu)`: calculates the scintillation bandwidth, $\Delta\nu_{\mathrm{d}}$ (MHz).
 3. `function scintime(sm,nu,vperp)`: calculates the scintillation time, $\Delta t_{\mathrm{ISS}}$ (sec) (Cordes & Lazio 1991; Cordes & Rickett 1998).
 4. `function specbroad(sm,nu,vperp)`: calculates the spectral broadening, $\Delta\nu_{\mathrm{b}}$ (Hz), that is proportional to the reciprocal of the scintillation time (Cordes & Lazio 1991).
 5. `function theta_xgal(sm,nu)`: calculates the angular broadening, $\theta_d$ (mas), appropriate for the scattering geometry for an extragalactic source (mas).
 6. `function theta_gal(sm,nu)`: calculates the angular broadening, $\theta_d$ (mas), of a Galactic source (mas).
-7. `function em(sm)`: calculates the emission measure, EM (pc cm$^{-6}$), associated with the scattering measure; note that the value calculated assumes a particular outer scale for a Kolmogorov wavenumber spectrum and represents a lower bound on EM (see text).
+7. `function em(sm)`: calculates the emission measure, EM ( $\mathrm{pc}\thinspace\mathrm{cm}^{-6}$ ), associated with the scattering measure; note that the value calculated assumes a particular outer scale for a Kolmogorov wavenumber spectrum and represents a lower bound on EM (see text).
 8. `function theta_iso(smiso,nu)`: calculates the isoplanatic angle, $\theta_{\mathrm{iso}}$ (mas), the region on the sky over which scintillations are correlated.  
 9. `function transition_frequency(sm,smtau,smtheta,dintegrate)`: calculates the frequency of transition,  $\nu_{\mathrm{trans}}$ (GHz), between the weak and strong scattering regimes.
 
-Sample output for $\ell=45\degree$, $b=5\degree$, and $\mathrm{DM}=50\;\mathrm{pc}\,\mathrm{cm}^{-3}$ is:
+Sample output for $\ell=45\degree$, $b=5\degree$, and $\mathrm{DM}=50\ \mathrm{pc}\thinspace\mathrm{cm}^{-3}$ is:
 ```
 NE2001.new 45 5 50 1
 #NE2001 input: 4 parameters  
